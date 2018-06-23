@@ -39,6 +39,7 @@ RUN cd /mcr-install && \
     cd / && \
     echo "Removing temporary files" && \
     rm -rvf mcr-install
+ RUN mv -v /opt/mcr/v92/sys/os/glnxa64/libstdc++.so.6 /opt/mcr/v92/sys/os/glnxa64/libstdc++.so.6.old
     
 # CONFIGURE ENVIRONMENT VARIABLES FOR MCR
 ENV LD_LIBRARY_PATH /opt/mcr/v92/runtime/glnxa64:/opt/mcr/v92/bin/glnxa64:/opt/mcr/v92/sys/os/glnxa64
