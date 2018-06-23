@@ -49,6 +49,7 @@ ENV XAPPLRESDIR /opt/mcr/v92/X11/app-defaults
 ###############################################################################################
 # INSTALL VIM
 # CONFIGURE ENVIRONMENT
+USER root
 ENV DEBIAN_FRONTEND noninteractive
 ENV SHELL /bin/bash
 ENV USERNAME murphylab
@@ -97,4 +98,5 @@ RUN echo "Downloading models" && \
 	rm -f cellorganizer-v2.7.2-models.tgz
 RUN chown -Rv murphylab:users /home/murphylab/cellorganizer
 USER murphylab
+WORKDIR /home/murphylab
 ###############################################################################################
