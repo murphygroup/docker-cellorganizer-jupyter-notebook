@@ -90,6 +90,7 @@ RUN echo "Downloading CellOrganizer v2.7.2" && \
 	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml
 RUN mkdir /home/murphylab/docker-python && mkdir /home/murphylab/cellorganizer
 COPY docker-python /home/murphylab/docker-python
+COPY cellorganizer /home/murphylab/cellorganizer
 RUN ls -lt /home/murphylab
 RUN cd /home/murphylab/docker-python && python setup.py install
 RUN rm -rf /home/murphylab/docker-python
