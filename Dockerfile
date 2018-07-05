@@ -2,10 +2,10 @@ FROM jupyter/scipy-notebook
 
 ###############################################################################################
 MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
-LABEL Description="MATLAB MCR"
-LABEL Vendor="Murphy Lab in the Computational Biology Department at Carnegie Mellon University"
-LABEL Web="http://murphylab.cbd.cmu.edu"
-LABEL Version="2017a"
+LABEL Description="CellOrganizer Docker + Jupyter Notebook"
+LABEL Vendor="CellOrganizer"
+LABEL Web="http://www.cellorganizer.org"
+LABEL Version="v2.7.2"
 ###############################################################################################
 
 ###############################################################################################
@@ -88,15 +88,16 @@ RUN echo "Downloading CellOrganizer v2.7.2" && \
 	ln -s /opt/cellorganizer-binaries/slml2report /usr/local/bin/slml2report && \
 	ln -s /opt/cellorganizer-binaries/slml2info /usr/local/bin/slml2info && \
 	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml
+RUN mkdir /home/murphylab/docker-python && mkdir /home/murphylab/cellorganizer
+COPY docker-python /home/murphylab/docker-python
+RUN ls -lt /home/murphylab
+RUN cd /home/murphylab/docker-python && python setup.py install
+RUN rm -rf /home/murphylab/docker-python
 ###############################################################################################
 
 ###############################################################################################
-USER murphylab
-RUN echo "Downloading models" && \
-	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.7/docker/v2.7.2/cellorganizer-v2.7.2-models.tgz && \
-	tar -xvf cellorganizer-v2.7.2-models.tgz && \
-	rm -f cellorganizer-v2.7.2-models.tgz
+USER root
 RUN chown -Rv murphylab:users /home/murphylab/cellorganizer
 USER murphylab
-WORKDIR /home/murphylab
+WORKDIR /home/murphylab/cellorganizer
 ###############################################################################################
