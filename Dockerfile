@@ -98,7 +98,7 @@ RUN rm -rf /home/murphylab/docker-python
 
 ###############################################################################################
 USER root
-RUN chown -Rv murphylab:users /home/murphylab/cellorganizer
+RUN chown -Rv 2000:users /home/murphylab/cellorganizer
 USER murphylab
 WORKDIR /home/murphylab/cellorganizer
 ###############################################################################################
