@@ -10,4 +10,4 @@ wget -nc http://www.cellorganizer.org/Downloads/v2.7/docker/v2.7.2/cellorganizer
 	tar -xvf cellorganizer-v2.7.2-models.tgz && \
 	rm -f cellorganizer-v2.7.2-models.tgz
 
-docker build -t cellorganizer/jupyter .
+docker build -t $(whoami)/cellorganizer .
