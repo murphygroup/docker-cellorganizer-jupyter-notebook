@@ -88,7 +88,7 @@ RUN echo "Downloading CellOrganizer v2.7.2" && \
 	ln -s /opt/cellorganizer-binaries/slml2report /usr/local/bin/slml2report && \
 	ln -s /opt/cellorganizer-binaries/slml2info /usr/local/bin/slml2info && \
 	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml
-RUN mkdir /home/murphylab/docker-python && mkdir /home/murphylab/cellorganizer
+RUN mkdir /home/murphylab/docker-python && mkdir /home/murphylab/cellorganizer && mkdir /scratch
 COPY docker-python /home/murphylab/docker-python
 COPY notebooks /home/murphylab/cellorganizer
 COPY cellorganizer /home/murphylab/cellorganizer
@@ -100,6 +100,7 @@ RUN rm -rf /home/murphylab/docker-python
 ###############################################################################################
 USER root
 RUN chown -Rv 2000:users /home/murphylab/cellorganizer
+RUN chown -Rv 2000:users /scratch
 USER murphylab
 WORKDIR /home/murphylab/cellorganizer
 ###############################################################################################
