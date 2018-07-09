@@ -69,6 +69,19 @@ RUN vim +PluginInstall +qall
 ###############################################################################################
 
 ###############################################################################################
+# INSTALL BFTOOLS
+RUN wget -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/artifacts/bftools.zip && \
+	unzip bftools.zip && \
+	rm -fv bftools.zip && \
+	mv -v bftools /opt/
+RUN ln -s /opt/bftools/bfconvert /usr/local/bin/bfconvert && \
+	ln -s /opt/bftools/showinf /usr/local/bin/showinf && \
+	ln -s /opt/bftools/tiffcomment /usr/local/bin/tiffcomment && \
+	ln -s /opt/bftools/xmlindent /usr/local/bin/xmlindent && \
+	ln -s /opt/bftools/xmlvalid /usr/local/bin/xmlvalid
+###############################################################################################
+
+###############################################################################################
 # INSTALL CELLORGANIZER BINARIES
 WORKDIR /home/murphylab
 USER root
