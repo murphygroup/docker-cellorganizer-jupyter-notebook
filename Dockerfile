@@ -69,6 +69,19 @@ RUN vim +PluginInstall +qall
 ###############################################################################################
 
 ###############################################################################################
+# INSTALL BFTOOLS
+RUN wget -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/artifacts/bftools.zip && \
+	unzip bftools.zip && \
+	rm -fv bftools.zip && \
+	mv -v bftools /opt/
+RUN ln -s /opt/bftools/bfconvert /usr/local/bin/bfconvert && \
+	ln -s /opt/bftools/showinf /usr/local/bin/showinf && \
+	ln -s /opt/bftools/tiffcomment /usr/local/bin/tiffcomment && \
+	ln -s /opt/bftools/xmlindent /usr/local/bin/xmlindent && \
+	ln -s /opt/bftools/xmlvalid /usr/local/bin/xmlvalid
+###############################################################################################
+
+###############################################################################################
 # INSTALL CELLORGANIZER BINARIES
 WORKDIR /home/murphylab
 USER root
@@ -88,7 +101,7 @@ RUN echo "Downloading CellOrganizer v2.7.2" && \
 	ln -s /opt/cellorganizer-binaries/slml2report /usr/local/bin/slml2report && \
 	ln -s /opt/cellorganizer-binaries/slml2info /usr/local/bin/slml2info && \
 	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml
-RUN mkdir /home/murphylab/docker-python && mkdir /home/murphylab/cellorganizer
+RUN mkdir /home/murphylab/docker-python && mkdir /home/murphylab/cellorganizer && mkdir /scratch
 COPY docker-python /home/murphylab/docker-python
 COPY notebooks /home/murphylab/cellorganizer
 COPY cellorganizer /home/murphylab/cellorganizer
@@ -100,6 +113,7 @@ RUN rm -rf /home/murphylab/docker-python
 ###############################################################################################
 USER root
 RUN chown -Rv 2000:users /home/murphylab/cellorganizer
+RUN chown -Rv 2000:users /scratch
 USER murphylab
 WORKDIR /home/murphylab/cellorganizer
 ###############################################################################################
