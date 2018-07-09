@@ -70,6 +70,7 @@ RUN vim +PluginInstall +qall
 
 ###############################################################################################
 # INSTALL BFTOOLS
+USER root
 RUN wget -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/artifacts/bftools.zip && \
 	unzip bftools.zip && \
 	rm -fv bftools.zip && \
