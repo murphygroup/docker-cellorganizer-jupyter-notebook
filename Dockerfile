@@ -20,7 +20,8 @@ RUN apt-get install -y build-essential git \
     tree \
     pandoc \
     curl \
-    vim
+    vim \
+    default-jdk
 RUN apt-get upgrade -y
 ###############################################################################################
 
