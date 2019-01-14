@@ -1,7 +1,7 @@
 # docker-cellorganizer-jupyter-notebook
 
 [![Build Status](https://travis-ci.org/icaoberg/docker-cellorganizer-jupyter-notebook.svg?branch=master)](https://travis-ci.org/icaoberg/docker-cellorganizer-jupyter-notebook)
-[![Release Status](https://img.shields.io/badge/release-v2.7.2-red.svg)](http://www.cellorganizer.org/)
+[![Release Status](https://img.shields.io/badge/release-v2.8.0-red.svg)](http://www.cellorganizer.org/)
 [![GitHub issues](https://img.shields.io/github/issues/icaoberg/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/icaoberg/docker-cellorganizer-jupyter-notebook/issues)
 [![GitHub forks](https://img.shields.io/github/forks/icaoberg/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/icaoberg/docker-cellorganizer-jupyter-notebook/network)
 [![GitHub stars](https://img.shields.io/github/stars/icaoberg/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/icaoberg/docker-cellorganizer-jupyter-notebook/stargazers)
