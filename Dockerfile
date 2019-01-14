@@ -5,7 +5,7 @@ MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
 LABEL Description="CellOrganizer Docker + Jupyter Notebook"
 LABEL Vendor="CellOrganizer"
 LABEL Web="http://www.cellorganizer.org"
-LABEL Version="v2.7.2"
+LABEL Version="v2.8.0"
 ###############################################################################################
 
 ###############################################################################################
@@ -87,11 +87,11 @@ RUN ln -s /opt/bftools/bfconvert /usr/local/bin/bfconvert && \
 # INSTALL CELLORGANIZER BINARIES
 WORKDIR /home/murphylab
 USER root
-RUN echo "Downloading CellOrganizer v2.7.2" && \
+RUN echo "Downloading CellOrganizer v2.8.0" && \
 	cd ~/ && \
-	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.7/docker/v2.7.2/cellorganizer-v2.7.2-binaries.tgz && \
-	tar -xvf cellorganizer-v2.7.2-binaries.tgz && \
-	rm cellorganizer-v2.7.2-binaries.tgz && \
+	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-binaries.tgz && \
+	tar -xvf cellorganizer-binaries.tgz && \
+	rm cellorganizer-binaries.tgz && \
 	mv cellorganizer-binaries /opt && \
 	chmod +x /opt/cellorganizer-binaries/img2slml && \
 	chmod +x /opt/cellorganizer-binaries/slml2img && \
