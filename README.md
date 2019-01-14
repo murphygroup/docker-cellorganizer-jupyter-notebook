@@ -31,6 +31,10 @@ These models can be conditional upon each other. For example, for a given synthe
 
 Cell types for which generative models for at least some organelles have been built include human HeLa cells, mouse NIH 3T3 cells, and Arabidopsis protoplasts. Planned projects include mouse T lymphocytes and rat PC12 cells.
 
+### CellOrganizer v2.7.0
+
+* COMING SOON!
+
 ### CellOrganizer v2.7.2
 
 #### Enhancements
