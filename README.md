@@ -31,6 +31,19 @@ These models can be conditional upon each other. For example, for a given synthe
 
 Cell types for which generative models for at least some organelles have been built include human HeLa cells, mouse NIH 3T3 cells, and Arabidopsis protoplasts. Planned projects include mouse T lymphocytes and rat PC12 cells.
 
+### CellOrganizer v2.8.0
+
+#### Features
+* Added T cell single time point model including a correction method for alignment of T cells. Includes training, synthesis and info demos.
+* Added outline PCA model. Includes training, synthesis and info demos.
+* Added SPHARM-RPDM model for 3D cell/nuclear shapes. Includes training, synthesis and info demos.
+
+#### Fixes 
+* Fixed issues with options.train.flag. Valid options should be nuclear, cell, framework, and protein.
+
+#### Enhancements
+* Modularized and cleaned up img2slml.
+
 ### CellOrganizer v2.7.2
 
 #### Enhancements
