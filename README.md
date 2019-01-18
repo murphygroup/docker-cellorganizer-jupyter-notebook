@@ -34,9 +34,9 @@ Cell types for which generative models for at least some organelles have been bu
 ### CellOrganizer v2.8.0
 
 #### Features
-* Added improved model for generating protein distributions during T cell synapse formation that only requires annotation of cell couples at a single time point model including a correction method forand improves synapse alignment of T cells. Includes training, synthesis and info demos.
-* Added outline PCA model for 2D cell and nuclear shapes.PCA model. Includes training, synthesis and info demos.
-* Added SPHARM-RPDM model for 3D cell/ and nuclear shapes (see https://doi.org/10.1093/bioinformatics/bty983). Includes training, synthesis and info demos.
+* Added improved model for generating protein distributions during T cell synapse formation that only requires annotation of cell couples at a single time point model and improves synapse alignment. Includes training, synthesis and info demos.
+* Added outline PCA model for 2D cell and nuclear shapes. Includes training, synthesis and info demos.
+* Added SPHARM-RPDM model for 3D cell and nuclear shapes (see https://doi.org/10.1093/bioinformatics/bty983). Includes training, synthesis and info demos.
 
 #### Fixes 
 * Fixed issues with options.train.flag. Valid options should be nuclear, cell, framework, and protein.
