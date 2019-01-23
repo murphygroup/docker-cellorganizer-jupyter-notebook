@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook as intermediate
+FROM icaoberg/matlabmcr2017a-jupyter as intermediate
 
 ###############################################################################################
 # INSTALL BFTOOLS
@@ -38,13 +38,17 @@ RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images/demo2D0
 COPY notebooks /home/murphylab/cellorganizer
 ###############################################################################################
 
-
-
+###############################################################################################
+# COPY LOGO
+RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
+	mv -v logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
+	
+	
 
 ################################ BUILD NEW IMAGE ##############################################
 
 ###############################################################################################
-FROM jupyter/scipy-notebook
+FROM icaoberg/matlabmcr2017a-jupyter
 
 ###############################################################################################
 MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
@@ -83,6 +87,9 @@ COPY --from=intermediate /home/murphylab /home/murphylab
 RUN mkdir /scratch
 RUN cd /home/murphylab/docker-python && python setup.py install
 RUN rm -rf /home/murphylab/docker-python
+
+# MOVE LOGO
+COPY --from=intermediate /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png
 
 ###############################################################################################
 
