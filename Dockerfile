@@ -102,13 +102,26 @@ COPY docker-python /home/murphylab/docker-python
 ###############################################################################################
 
 ###############################################################################################
+# INSTALL CELLORGANIZER IMAGES FOR DEMO2D01
+RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images/demo2D01.tgz && \
+        mkdir -p cellorganizer/images/HeLa/2D/LAMP2 && \
+        tar -xvf demo2D01.tgz -C cellorganizer/images/HeLa/2D/LAMP2/ && \
+	rm -fv demo2D01.tgz
+###############################################################################################
+
+###############################################################################################
 # INSTALL CELLORGANIZER NOTEBOOKS
 COPY notebooks /home/murphylab/cellorganizer
 ###############################################################################################
 
+###############################################################################################
+# COPY LOGO
 RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
 	mv -v logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
-RUN ls -lt /home/murphylab
+###############################################################################################
+
+###############################################################################################
+# INSTALL CELLORGANIZER FOR PYTHON
 RUN cd /home/murphylab/docker-python && python setup.py install
 RUN rm -rf /home/murphylab/docker-python
 ###############################################################################################
