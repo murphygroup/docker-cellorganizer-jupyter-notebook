@@ -101,7 +101,7 @@ RUN mkdir /home/murphylab/docker-python && mkdir /home/murphylab/cellorganizer &
 COPY docker-python /home/murphylab/docker-python
 COPY notebooks /home/murphylab/cellorganizer
 RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
-	logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
+	mv -v logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
 COPY cellorganizer /home/murphylab/cellorganizer
 RUN ls -lt /home/murphylab
 RUN cd /home/murphylab/docker-python && python setup.py install
