@@ -12,5 +12,5 @@ wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images/demo2D01.tg
 	mkdir -p cellorganizer/images/HeLa/2D/LAMP2 && \
 	tar -xvf demo2D01.tgz -C cellorganizer/images/HeLa/2D/LAMP2/
 docker build -t $(whoami)/cellorganizer .
-wget -nc /www/wordpress_instances/cellorganizer/Downloads/v2.8.0/docker/logo.png
+wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png
 rm -rfv cellorganizer
