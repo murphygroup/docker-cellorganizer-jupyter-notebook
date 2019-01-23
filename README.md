@@ -44,45 +44,6 @@ Cell types for which generative models for at least some organelles have been bu
 #### Enhancements
 * Modularized and cleaned up img2slml.
 
-### CellOrganizer v2.7.2
-
-#### Enhancements
-* Created method slml2slml. The method joins together multiple model files.
-* Updated methods for CellOrganizer for Galaxy.
-
-#### Fixes
-* Fixed several small issues that accelerate synthesis.
-* Fixed issues with the creation of OME.TIFFs with ROIs.
-
-### CellOrganizer v2.7.1
-
-#### Enhancements
-* Created method slml2info to replace model2info. The method creates a report with useful information from a model file. Method writes report with Matlab Publisher. When method is deployed, then it generates a report in Markdown.
-* Created method slml2report. The method creates a report comparing two model files. Method writes report with Matlab Publisher. When method is deployed, then it generates a report in Markdown.
-* Created demos demo2D08 and demo2D09 to show how to make a report from a PCA framework model.
-
-#### Fixes
-* Fixed problem with demo3D46. Unable to synthesize image from CSGO model when combined with a vesicle model.
-* Fixed problem with demo3D35. Unable to produce figure.
-
-### CellOrganizer v2.7.0
-
-#### Features
-
-* Included new model class/type: constructive_geometry/half-ellipsoid
-* Included new model class/type: framework/pca
-* Included support for OME.TIFF with regions of interest
-* Included bash scripts to run demos from compiled versions of the main functions
-
-#### Enhancements
-
-* img2slml now checks the combination of model class and type for every submodel before attempting to extract parameters from image 
-* Improved pipeline so that CellOrganizer will stop computation and report to user if no images are found in the path or if software fails to extract parameters.
-* Added demo3D44 to show how to synthesize from a model class/type constructive_geomertry/half-ellipsoid
-* Added a battery of unit test for demos using Matlab testing framework
-* Added demo3D45 to show how to use OME.TIFF files with ROIs.
-* Added demo2D05, demo2D06, demo2D07 to show how to train and synthesize from a classtype framework/pca model
-
 #### Demo List
 
 The following demo scripts are included in the image. 
