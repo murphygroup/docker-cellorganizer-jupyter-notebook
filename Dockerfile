@@ -1,3 +1,9 @@
+###############################################################################################
+# ___   ____ _      _ _ ___   ____ ___         __ _
+#  | |\ |||_|_)|\/||_| \ |  /\ ||_  | |\/| /\ /__|_
+# _|_| \|||_| \|  ||_|_/_|_/--\||_ _|_|  |/--\\_||_
+###############################################################################################
+
 FROM icaoberg/matlabmcr2017a-jupyter as intermediate
 
 ###############################################################################################
@@ -7,7 +13,6 @@ RUN wget -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/artifact
 	unzip bftools.zip && \
 	rm -fv bftools.zip && \
 	mv -v bftools /opt/
-	
 ###############################################################################################
 
 ###############################################################################################
@@ -28,8 +33,8 @@ COPY docker-python /home/murphylab/docker-python
 ###############################################################################################
 # INSTALL CELLORGANIZER IMAGES FOR DEMO2D01
 RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images/demo2D01.tgz && \
-        mkdir -p cellorganizer/images/HeLa/2D/LAMP2 && \
-        tar -xvf demo2D01.tgz -C cellorganizer/images/HeLa/2D/LAMP2/ && \
+	mkdir -p cellorganizer/images/HeLa/2D/LAMP2 && \
+  tar -xvf demo2D01.tgz -C cellorganizer/images/HeLa/2D/LAMP2/ && \
 	rm -fv demo2D01.tgz
 ###############################################################################################
 
@@ -39,27 +44,31 @@ COPY notebooks /home/murphylab/cellorganizer
 ###############################################################################################
 
 ###############################################################################################
-# COPY LOGO
+# COPY CELLORGANIZER LOGO TO JUPYTER NOTEBOOK
 RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
 	mv -v logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
-	
-	
-
-################################ BUILD NEW IMAGE ##############################################
+###############################################################################################
 
 ###############################################################################################
+#  _    ___   _       _       ___         __ _
+# |_)| | | | | \ |\ ||_\    /  | |\/| /\ /__|_
+# |_)|_|_|_|_|_/ | \||_ \/\/  _|_|  |/--\\_||_
+#
+###############################################################################################
+
 FROM icaoberg/matlabmcr2017a-jupyter
 
 ###############################################################################################
 MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
-LABEL Description="CellOrganizer Docker + Jupyter Notebook"
+LABEL Description="CellOrganizer + Jupyter Notebook"
 LABEL Vendor="CellOrganizer"
 LABEL Web="http://www.cellorganizer.org"
 LABEL Version="v2.8.0"
 ###############################################################################################
-USER root
+
 ###############################################################################################
-# COPY bftools
+# COPY BFTOOLS FROM INTERMEDIATE TO FINAL IMAGE
+USER root
 COPY --from=intermediate /opt/bftools /opt/bftools
 RUN ln -s /opt/bftools/bfconvert /usr/local/bin/bfconvert && \
 	ln -s /opt/bftools/showinf /usr/local/bin/showinf && \
@@ -67,7 +76,7 @@ RUN ln -s /opt/bftools/bfconvert /usr/local/bin/bfconvert && \
 	ln -s /opt/bftools/xmlindent /usr/local/bin/xmlindent && \
 	ln -s /opt/bftools/xmlvalid /usr/local/bin/xmlvalid
 
-# COPY cellorganizer binaries
+# COPY CELLORGANIZER BINARIES FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /opt/cellorganizer-binaries /opt/cellorganizer-binaries
 RUN	chmod +x /opt/cellorganizer-binaries/img2slml && \
 	chmod +x /opt/cellorganizer-binaries/slml2img && \
@@ -80,7 +89,7 @@ RUN	chmod +x /opt/cellorganizer-binaries/img2slml && \
 	ln -s /opt/cellorganizer-binaries/slml2info /usr/local/bin/slml2info && \
 	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml
 
-# COPYING MURPHYLAB 
+# COPY HOME DIRECTORY FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /home/murphylab /home/murphylab
 
 # INSTALL CELLORGANIZER FOR PYTHON
@@ -88,13 +97,11 @@ RUN mkdir /scratch
 RUN cd /home/murphylab/docker-python && python setup.py install
 RUN rm -rf /home/murphylab/docker-python
 
-# MOVE LOGO
+# MOVE LOGO FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png
-
 ###############################################################################################
 
 ###############################################################################################
-# INSTALL VIM
 # CONFIGURE ENVIRONMENT
 USER root
 ENV DEBIAN_FRONTEND noninteractive
@@ -103,14 +110,12 @@ ENV USERNAME murphylab
 ENV UID 2000
 RUN useradd -m -s /bin/bash -N -u $UID $USERNAME
 RUN if [ ! -d /home/$USERNAME/ ]; then mkdir /home/$USERNAME/; fi
-
-# PREPARE IDE
 USER $USERNAME
 WORKDIR /home/$USERNAME/
 ###############################################################################################
 
-##############################################################################################
-USER root
+##############################################################################################\
+# GET READY!
 RUN chown -Rv 2000:users /home/murphylab/cellorganizer
 RUN chown -Rv 2000:users /scratch
 USER murphylab
