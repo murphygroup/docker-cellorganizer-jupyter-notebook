@@ -106,6 +106,9 @@ COPY --from=intermediate /opt/conda/lib/python3.6/site-packages/notebook/static/
 USER root
 ENV DEBIAN_FRONTEND noninteractive
 ENV SHELL /bin/bash
+ENV USERNAME murphylab
+ENV UID 2000
+RUN useradd -m -s /bin/bash -N -u $UID $USERNAME
 RUN if [ ! -d /home/$USERNAME/ ]; then mkdir /home/$USERNAME/; fi
 ###############################################################################################
 
