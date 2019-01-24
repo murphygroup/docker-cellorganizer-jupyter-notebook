@@ -9,7 +9,7 @@ FROM icaoberg/matlabmcr2017a-jupyter as intermediate
 ###############################################################################################
 # INSTALL BFTOOLS
 USER root
-RUN wget -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/artifacts/bftools.zip && \
+RUN wget --quiet -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/artifacts/bftools.zip && \
 	unzip bftools.zip && \
 	rm -fv bftools.zip && \
 	mv -v bftools /opt/
@@ -32,7 +32,7 @@ COPY docker-python /home/murphylab/docker-python
 
 ###############################################################################################
 # INSTALL CELLORGANIZER IMAGES FOR DEMO2D01
-RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images/demo2D01.tgz && \
+RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images/demo2D01.tgz && \
 	mkdir -p cellorganizer/images/HeLa/2D/LAMP2 && \
   tar -xvf demo2D01.tgz -C cellorganizer/images/HeLa/2D/LAMP2/ && \
 	rm -fv demo2D01.tgz
@@ -45,7 +45,7 @@ COPY notebooks /home/murphylab/cellorganizer
 
 ###############################################################################################
 # COPY CELLORGANIZER LOGO TO JUPYTER NOTEBOOK
-RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
+RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
 	mv -v logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
 ###############################################################################################
 
@@ -106,16 +106,12 @@ COPY --from=intermediate /opt/conda/lib/python3.6/site-packages/notebook/static/
 USER root
 ENV DEBIAN_FRONTEND noninteractive
 ENV SHELL /bin/bash
-ENV USERNAME murphylab
-ENV UID 2000
-RUN useradd -m -s /bin/bash -N -u $UID $USERNAME
 RUN if [ ! -d /home/$USERNAME/ ]; then mkdir /home/$USERNAME/; fi
-USER $USERNAME
-WORKDIR /home/$USERNAME/
 ###############################################################################################
 
 ##############################################################################################\
 # GET READY!
+USER root
 RUN chown -Rv 2000:users /home/murphylab/cellorganizer
 RUN chown -Rv 2000:users /scratch
 USER murphylab
