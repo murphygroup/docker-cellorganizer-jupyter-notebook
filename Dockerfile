@@ -34,8 +34,17 @@ COPY docker-python /home/murphylab/docker-python
 # INSTALL CELLORGANIZER IMAGES FOR DEMO2D01
 RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images/demo2D01.tgz && \
 	mkdir -p cellorganizer/images/HeLa/2D/LAMP2 && \
-  tar -xvf demo2D01.tgz -C cellorganizer/images/HeLa/2D/LAMP2/ && \
+	tar -xvf demo2D01.tgz -C cellorganizer/images/HeLa/2D/LAMP2/ && \
 	rm -fv demo2D01.tgz
+###############################################################################################
+
+###############################################################################################
+# INSTALL CELLORGANIZER 3D Diffeomorphic Models
+RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-models.tgz && \
+	mkdir cell-models && tar -xvf cellorganizer-models.tgz -C cell-models && \
+	mkdir -p cellorganizer/models/3D/diffeomorphic && \
+ 	mv -v cell-models/cellorganizer/models/3D/diffeomorphic/ cellorganizer/models/3D/diffeomorphic && \
+	rm -rf cellorganizer-models.tgz cell-models
 ###############################################################################################
 
 ###############################################################################################
@@ -48,6 +57,8 @@ COPY notebooks /home/murphylab/cellorganizer
 RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
 	mv -v logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
 ###############################################################################################
+
+
 
 ###############################################################################################
 #  _    ___   _       _       ___         __ _
