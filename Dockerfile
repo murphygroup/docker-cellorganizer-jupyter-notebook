@@ -43,7 +43,7 @@ RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images
 RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-models.tgz && \
 	mkdir cell-models && tar -xvf cellorganizer-models.tgz -C cell-models && \
 	mkdir -p cellorganizer/models/3D/diffeomorphic && \
- 	mv -v cell-models/cellorganizer/models/3D/diffeomorphic/ cellorganizer/models/3D/diffeomorphic && \
+ 	mv -v cell-models/cellorganizer/models/3D/diffeomorphic/* cellorganizer/models/3D/diffeomorphic && \
 	rm -rf cellorganizer-models.tgz cell-models
 ###############################################################################################
 
