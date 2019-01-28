@@ -1,80 +1,18 @@
-FROM jupyter/scipy-notebook
-
 ###############################################################################################
-MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
-LABEL Description="CellOrganizer Docker + Jupyter Notebook"
-LABEL Vendor="CellOrganizer"
-LABEL Web="http://www.cellorganizer.org"
-LABEL Version="v2.8.0"
+# ___   ____ _      _ _ ___   ____ ___         __ _
+#  | |\ |||_|_)|\/||_| \ |  /\ ||_  | |\/| /\ /__|_
+# _|_| \|||_| \|  ||_|_/_|_/--\||_ _|_|  |/--\\_||_
 ###############################################################################################
 
-###############################################################################################
-# UPDATE OS AND INSTALL TOOLS
-USER root
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
-RUN apt-get install -y build-essential git \
-    unzip \
-    xorg \
-    wget \
-    tree \
-    pandoc \
-    curl \
-    vim \
-    default-jdk
-RUN apt-get upgrade -y
-###############################################################################################
-
-###############################################################################################
-# INSTALL MATLAB MCR 2017 A
-USER root
-RUN echo "Downloading Matlab MCR 2017a"
-RUN mkdir /mcr-install && \
-    mkdir /opt/mcr
-RUN cd /mcr-install && \
-    wget -nc http://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip && \
-    cd /mcr-install && \
-    echo "Unzipping container" && \
-    unzip -q MCR_R2017a_glnxa64_installer.zip && \
-    ./install -destinationFolder /opt/mcr -agreeToLicense yes -mode silent && \
-    cd / && \
-    echo "Removing temporary files" && \
-    rm -rvf mcr-install
- RUN mv -v /opt/mcr/v92/sys/os/glnxa64/libstdc++.so.6 /opt/mcr/v92/sys/os/glnxa64/libstdc++.so.6.old
-
-# CONFIGURE ENVIRONMENT VARIABLES FOR MCR
-ENV LD_LIBRARY_PATH /opt/mcr/v92/runtime/glnxa64:/opt/mcr/v92/bin/glnxa64:/opt/mcr/v92/sys/os/glnxa64
-ENV XAPPLRESDIR /opt/mcr/v92/X11/app-defaults
-###############################################################################################
-
-###############################################################################################
-# INSTALL VIM
-# CONFIGURE ENVIRONMENT
-USER root
-ENV DEBIAN_FRONTEND noninteractive
-ENV SHELL /bin/bash
-ENV USERNAME murphylab
-ENV UID 2000
-RUN useradd -m -s /bin/bash -N -u $UID $USERNAME
-RUN if [ ! -d /home/$USERNAME/ ]; then mkdir /home/$USERNAME/; fi
-
-# PREPARE IDE
-USER $USERNAME
-WORKDIR /home/$USERNAME/
-###############################################################################################
+FROM icaoberg/matlabmcr2017a-jupyter as intermediate
 
 ###############################################################################################
 # INSTALL BFTOOLS
 USER root
-RUN wget -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/artifacts/bftools.zip && \
+RUN wget --quiet -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/artifacts/bftools.zip && \
 	unzip bftools.zip && \
 	rm -fv bftools.zip && \
 	mv -v bftools /opt/
-RUN ln -s /opt/bftools/bfconvert /usr/local/bin/bfconvert && \
-	ln -s /opt/bftools/showinf /usr/local/bin/showinf && \
-	ln -s /opt/bftools/tiffcomment /usr/local/bin/tiffcomment && \
-	ln -s /opt/bftools/xmlindent /usr/local/bin/xmlindent && \
-	ln -s /opt/bftools/xmlvalid /usr/local/bin/xmlvalid
 ###############################################################################################
 
 ###############################################################################################
@@ -86,8 +24,72 @@ RUN echo "Downloading CellOrganizer v2.8.0" && \
 	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-binaries.tgz && \
 	tar -xvf cellorganizer-binaries.tgz && \
 	rm cellorganizer-binaries.tgz && \
-	mv cellorganizer-binaries /opt && \
-	chmod +x /opt/cellorganizer-binaries/img2slml && \
+	mv cellorganizer-binaries /opt
+
+RUN mkdir /home/murphylab/docker-python && mkdir /home/murphylab/cellorganizer
+COPY docker-python /home/murphylab/docker-python
+###############################################################################################
+
+###############################################################################################
+# INSTALL CELLORGANIZER IMAGES FOR DEMO2D01
+RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images/demo2D01.tgz && \
+	mkdir -p cellorganizer/images/HeLa/2D/LAMP2 && \
+	tar -xvf demo2D01.tgz -C cellorganizer/images/HeLa/2D/LAMP2/ && \
+	rm -fv demo2D01.tgz
+###############################################################################################
+
+###############################################################################################
+# INSTALL CELLORGANIZER 3D Diffeomorphic Models
+RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-models.tgz && \
+	mkdir cell-models && tar -xvf cellorganizer-models.tgz -C cell-models && \
+	mkdir -p cellorganizer/models/3D/diffeomorphic && \
+ 	mv -v cell-models/cellorganizer/models/3D/diffeomorphic/* cellorganizer/models/3D/diffeomorphic && \
+	rm -rf cellorganizer-models.tgz cell-models
+###############################################################################################
+
+###############################################################################################
+# INSTALL CELLORGANIZER NOTEBOOKS
+COPY notebooks /home/murphylab/cellorganizer
+###############################################################################################
+
+###############################################################################################
+# COPY CELLORGANIZER LOGO TO JUPYTER NOTEBOOK
+RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
+	mv -v logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
+###############################################################################################
+
+
+
+###############################################################################################
+#  _    ___   _       _       ___         __ _
+# |_)| | | | | \ |\ ||_\    /  | |\/| /\ /__|_
+# |_)|_|_|_|_|_/ | \||_ \/\/  _|_|  |/--\\_||_
+#
+###############################################################################################
+
+FROM icaoberg/matlabmcr2017a-jupyter
+
+###############################################################################################
+MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
+LABEL Description="CellOrganizer + Jupyter Notebook"
+LABEL Vendor="CellOrganizer"
+LABEL Web="http://www.cellorganizer.org"
+LABEL Version="v2.8.0"
+###############################################################################################
+
+###############################################################################################
+# COPY BFTOOLS FROM INTERMEDIATE TO FINAL IMAGE
+USER root
+COPY --from=intermediate /opt/bftools /opt/bftools
+RUN ln -s /opt/bftools/bfconvert /usr/local/bin/bfconvert && \
+	ln -s /opt/bftools/showinf /usr/local/bin/showinf && \
+	ln -s /opt/bftools/tiffcomment /usr/local/bin/tiffcomment && \
+	ln -s /opt/bftools/xmlindent /usr/local/bin/xmlindent && \
+	ln -s /opt/bftools/xmlvalid /usr/local/bin/xmlvalid
+
+# COPY CELLORGANIZER BINARIES FROM INTERMEDIATE TO FINAL IMAGE
+COPY --from=intermediate /opt/cellorganizer-binaries /opt/cellorganizer-binaries
+RUN	chmod +x /opt/cellorganizer-binaries/img2slml && \
 	chmod +x /opt/cellorganizer-binaries/slml2img && \
 	chmod +x /opt/cellorganizer-binaries/slml2report && \
 	chmod +x /opt/cellorganizer-binaries/slml2info && \
@@ -97,46 +99,35 @@ RUN echo "Downloading CellOrganizer v2.8.0" && \
 	ln -s /opt/cellorganizer-binaries/slml2report /usr/local/bin/slml2report && \
 	ln -s /opt/cellorganizer-binaries/slml2info /usr/local/bin/slml2info && \
 	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml
-RUN mkdir /home/murphylab/docker-python && mkdir /home/murphylab/cellorganizer && mkdir /scratch
-COPY docker-python /home/murphylab/docker-python
-###############################################################################################
 
-###############################################################################################
-# INSTALL CELLORGANIZER IMAGES FOR DEMO2D01
-RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images/demo2D01.tgz && \
-        mkdir -p cellorganizer/images/HeLa/2D/LAMP2 && \
-        tar -xvf demo2D01.tgz -C cellorganizer/images/HeLa/2D/LAMP2/ && \
-	rm -fv demo2D01.tgz
-###############################################################################################
+# COPY HOME DIRECTORY FROM INTERMEDIATE TO FINAL IMAGE
+COPY --from=intermediate /home/murphylab /home/murphylab
 
-###############################################################################################
-# INSTALL CELLORGANIZER NOTEBOOKS
-COPY notebooks /home/murphylab/cellorganizer
-###############################################################################################
-
-###############################################################################################
-# COPY LOGO
-RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
-	mv -v logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
-###############################################################################################
-
-###############################################################################################
 # INSTALL CELLORGANIZER FOR PYTHON
+RUN mkdir /scratch
 RUN cd /home/murphylab/docker-python && python setup.py install
 RUN rm -rf /home/murphylab/docker-python
+
+# MOVE LOGO FROM INTERMEDIATE TO FINAL IMAGE
+COPY --from=intermediate /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png
 ###############################################################################################
 
 ###############################################################################################
-# INSTALL CELLORGANIZER MODELS
-RUN wget -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-models.tgz && \
-	tar -xvf cellorganizer-models.tgz && \
-  rm -fv cellorganizer-models.tgz
+# CONFIGURE ENVIRONMENT
+USER root
+ENV DEBIAN_FRONTEND noninteractive
+ENV SHELL /bin/bash
+ENV USERNAME murphylab
+ENV UID 2000
+RUN useradd -m -s /bin/bash -N -u $UID $USERNAME
+RUN if [ ! -d /home/$USERNAME/ ]; then mkdir /home/$USERNAME/; fi
 ###############################################################################################
 
-###############################################################################################
+##############################################################################################\
+# GET READY!
 USER root
 RUN chown -Rv 2000:users /home/murphylab/cellorganizer
 RUN chown -Rv 2000:users /scratch
 USER murphylab
 WORKDIR /home/murphylab/cellorganizer
-###############################################################################################
+##############################################################################################
