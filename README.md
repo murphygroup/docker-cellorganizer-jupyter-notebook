@@ -1,10 +1,10 @@
 # docker-cellorganizer-jupyter-notebook
 
-[![Build Status](https://travis-ci.org/icaoberg/docker-cellorganizer-jupyter-notebook.svg?branch=master)](https://travis-ci.org/icaoberg/docker-cellorganizer-jupyter-notebook)
+[![Build Status](https://travis-ci.org/murphygroup/docker-cellorganizer-jupyter-notebook.svg?branch=master)](https://travis-ci.org/murphygroup/docker-cellorganizer-jupyter-notebook)
 [![Release Status](https://img.shields.io/badge/release-v2.8.0-red.svg)](http://www.cellorganizer.org/)
-[![GitHub issues](https://img.shields.io/github/issues/icaoberg/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/icaoberg/docker-cellorganizer-jupyter-notebook/issues)
-[![GitHub forks](https://img.shields.io/github/forks/icaoberg/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/icaoberg/docker-cellorganizer-jupyter-notebook/network)
-[![GitHub stars](https://img.shields.io/github/stars/icaoberg/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/icaoberg/docker-cellorganizer-jupyter-notebook/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/murphygroup/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/murphygroup/docker-cellorganizer-jupyter-notebook/issues)
+[![GitHub forks](https://img.shields.io/github/forks/murphygroup/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/murphygroup/docker-cellorganizer-jupyter-notebook/network)
+[![GitHub stars](https://img.shields.io/github/stars/murphygroup/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/murphygroup/docker-cellorganizer-jupyter-notebook/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/quick-guide-gplv3.en.html)
 
 ## About CellOrganizer 
@@ -79,11 +79,11 @@ The easiest way to download an image and run a container is to use [Kitematic(ht
 
 Running Kitematic will open a window that looks like this
 
-![Kitematic](https://raw.githubusercontent.com/icaoberg/docker-cellorganizer/master/images/kitematic.png)
+![Kitematic](https://raw.githubusercontent.com/murphygroup/docker-cellorganizer/master/images/kitematic.png)
 
 Use the searchbar to search for `cellorganizer`
 
-![CellOrganizer](https://raw.githubusercontent.com/icaoberg/docker-cellorganizer/master/images/cellorganizer.png)
+![CellOrganizer](https://raw.githubusercontent.com/murphygroup/docker-cellorganizer/master/images/cellorganizer.png)
 
 and click `Create`.
 
@@ -127,4 +127,4 @@ Support for [CellOrganizer](http://cellorganizer.org/) has been provided by gran
 
 [![MMBioS](https://i1.wp.com/www.cellorganizer.org/wp-content/uploads/2017/08/MMBioSlogo-e1503517857313.gif?h=60)](http://www.mmbios.org)
 
-Copyright © 2007-2018 by the [Murphy Lab](http://murphylab.web.cmu.edu) at the [Computational Biology Department](http://www.cbd.cmu.edu) in [Carnegie Mellon University](http://www.cmu.edu)
+Copyright © 2007-2019 by the [Murphy Lab](http://murphylab.web.cmu.edu) at the [Computational Biology Department](http://www.cbd.cmu.edu) in [Carnegie Mellon University](http://www.cmu.edu)
