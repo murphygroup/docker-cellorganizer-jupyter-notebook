@@ -67,7 +67,7 @@ RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.p
 #
 ###############################################################################################
 
-FROM icaoberg/matlabmcr2017a-jupyter
+FROM murphylab/matlabmcr2017a-jupyter
 
 ###############################################################################################
 MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
@@ -112,22 +112,11 @@ RUN rm -rf /home/murphylab/docker-python
 COPY --from=intermediate /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png
 ###############################################################################################
 
-###############################################################################################
-# CONFIGURE ENVIRONMENT
-USER root
-ENV DEBIAN_FRONTEND noninteractive
-ENV SHELL /bin/bash
-ENV USERNAME murphylab
-ENV UID 2000
-RUN useradd -m -s /bin/bash -N -u $UID $USERNAME
-RUN if [ ! -d /home/$USERNAME/ ]; then mkdir /home/$USERNAME/; fi
-###############################################################################################
-
 ##############################################################################################\
 # GET READY!
 USER root
-RUN chown -Rv 2000:users /home/murphylab/cellorganizer
-RUN chown -Rv 2000:users /scratch
+RUN chown -Rv 1001:users /home/murphylab/cellorganizer
+RUN chown -Rv 1001:users /scratch
 USER murphylab
 WORKDIR /home/murphylab/cellorganizer
 ##############################################################################################
