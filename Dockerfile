@@ -49,7 +49,7 @@ RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellor
 
 ###############################################################################################
 # INSTALL CELLORGANIZER NOTEBOOKS
-COPY notebooks /home/murphylab/cellorganizer
+COPY files /home/murphylab/cellorganizer
 ###############################################################################################
 
 ###############################################################################################
