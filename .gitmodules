@@ -1,3 +1,0 @@
-[submodule "docker-python"]
-	path = docker-python
-	url = http://repositories.compbio.cs.cmu.edu/cellorganizer/docker-python.git
