@@ -26,8 +26,8 @@ RUN echo "Downloading CellOrganizer v2.8.0" && \
 	rm cellorganizer-binaries.tgz && \
 	mv cellorganizer-binaries /opt
 
-RUN mkdir /home/murphylab/docker-python && mkdir /home/murphylab/cellorganizer
-COPY docker-python /home/murphylab/docker-python
+RUN mkdir /home/murphylab/cellorganizer-python && mkdir /home/murphylab/cellorganizer
+COPY docker-python /home/murphylab/cellorganizer-python
 ###############################################################################################
 
 ###############################################################################################
@@ -57,8 +57,6 @@ COPY files /home/murphylab/cellorganizer
 RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
 	mv -v logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
 ###############################################################################################
-
-
 
 ###############################################################################################
 #  _    ___   _       _       ___         __ _
@@ -105,8 +103,8 @@ COPY --from=intermediate /home/murphylab /home/murphylab
 
 # INSTALL CELLORGANIZER FOR PYTHON
 RUN mkdir /scratch
-RUN cd /home/murphylab/docker-python && python setup.py install
-RUN rm -rf /home/murphylab/docker-python
+RUN cd /home/murphylab/cellorganizer-python && python setup.py install
+RUN rm -rf /home/murphylab/cellorganizer-python
 
 # MOVE LOGO FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png
