@@ -27,7 +27,7 @@ RUN echo "Downloading CellOrganizer v2.8.0" && \
 	mv cellorganizer-binaries /opt
 
 RUN mkdir /home/murphylab/cellorganizer-python && mkdir /home/murphylab/cellorganizer
-COPY docker-python /home/murphylab/cellorganizer-python
+COPY cellorganizer-python /home/murphylab/cellorganizer-python
 ###############################################################################################
 
 ###############################################################################################
