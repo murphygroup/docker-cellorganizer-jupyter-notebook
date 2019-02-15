@@ -4,7 +4,7 @@
 # _|_| \|||_| \|  ||_|_/_|_/--\||_ _|_|  |/--\\_||_
 ###############################################################################################
 
-FROM murphylab/matlabmcr2017a-jupyter as intermediate
+FROM murphylab/matlabmcr2018b-jupyter as intermediate
 
 ###############################################################################################
 # INSTALL BFTOOLS
@@ -65,7 +65,7 @@ RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.p
 #
 ###############################################################################################
 
-FROM murphylab/matlabmcr2017a-jupyter
+FROM murphylab/matlabmcr2018b-jupyter
 
 ###############################################################################################
 MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
