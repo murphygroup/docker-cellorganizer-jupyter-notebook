@@ -4,7 +4,7 @@
 # _|_| \|||_| \|  ||_|_/_|_/--\||_ _|_|  |/--\\_||_
 ###############################################################################################
 
-FROM murphylab/matlabmcr2018b-jupyter as intermediate
+FROM asankar/matlab2018b as intermediate
 
 ###############################################################################################
 # INSTALL BFTOOLS
@@ -21,9 +21,9 @@ WORKDIR /home/murphylab
 USER root
 RUN echo "Downloading CellOrganizer v2.8.0" && \
 	cd ~/ && \
-	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-binaries.tgz && \
-	tar -xvf cellorganizer-binaries.tgz && \
-	rm cellorganizer-binaries.tgz && \
+	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-binaries-matlabmcr2018b.tgz && \
+	tar -xvf cellorganizer-binaries-matlabmcr2018b.tgz && \
+	rm cellorganizer-binaries-matlabmcr2018b.tgz && \
 	mv cellorganizer-binaries /opt
 
 RUN mkdir /home/murphylab/cellorganizer-python && mkdir /home/murphylab/cellorganizer
@@ -65,7 +65,7 @@ RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.p
 #
 ###############################################################################################
 
-FROM murphylab/matlabmcr2018b-jupyter
+FROM asankar/matlab2018b
 
 ###############################################################################################
 MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
