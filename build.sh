@@ -2,8 +2,8 @@
 
 git submodule init
 git submodule update
-cd docker-python
+cd cellorganizer-python
 git checkout master
 cd ..
+docker build --no-cache -t $(whoami)/cellorganizer-jupyter .
 
-rm -rfv cellorganizer
