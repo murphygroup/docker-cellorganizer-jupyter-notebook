@@ -19,12 +19,12 @@ RUN wget --quiet -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/
 # INSTALL CELLORGANIZER BINARIES
 WORKDIR /home/murphylab
 USER root
-RUN echo "Downloading CellOrganizer v2.8.0" && \
-	cd ~/ && \
-	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-binaries-matlabmcr2018b.tgz && \
-	tar -xvf cellorganizer-binaries-matlabmcr2018b.tgz && \
-	rm cellorganizer-binaries-matlabmcr2018b.tgz && \
-	mv cellorganizer-binaries /opt
+COPY cellorganizer-binaries.tgz /home/murphylab
+RUN echo "Downloading CellOrganizer v2.8.0"
+RUN cd /home/murphylab && \
+    tar -xvf cellorganizer-binaries.tgz && \
+    rm cellorganizer-binaries.tgz && \
+    mv cellorganizer-binaries /opt
 
 RUN mkdir /home/murphylab/cellorganizer-python && mkdir /home/murphylab/cellorganizer
 COPY cellorganizer-python /home/murphylab/cellorganizer-python
@@ -108,6 +108,11 @@ RUN rm -rf /home/murphylab/cellorganizer-python
 
 # MOVE LOGO FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png
+RUN apt-get update && apt-get install -y xserver-xorg
+
+# Install Extensions
+RUN conda install -c conda-forge jupyter_contrib_nbextensions
+RUN jupyter nbextension enable hide_input_all/main
 ###############################################################################################
 
 ##############################################################################################\
