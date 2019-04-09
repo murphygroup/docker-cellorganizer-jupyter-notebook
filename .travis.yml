@@ -11,5 +11,5 @@ branches:
     - master
 
 script:
-  - docker build -t murphylab/cellorganizer .
+  - bash ./build.sh
   - docker images list
