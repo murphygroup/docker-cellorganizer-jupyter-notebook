@@ -69,7 +69,7 @@ Installing Docker is beyond the scope of this document. To learn about Docker Co
 
 ### Installing Kitematic
 
-The easiest way to download an image and run a container is to use [Kitematic(https://kitematic.com/).
+The easiest way to download an image and run a container is to use [Kitematic](https://kitematic.com/).
 
 * To install Kitematic, click [here](https://kitematic.com/docs/).
 
