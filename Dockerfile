@@ -19,12 +19,10 @@ RUN wget --quiet -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/
 # INSTALL CELLORGANIZER BINARIES
 WORKDIR /home/murphylab
 USER root
-RUN echo "Downloading CellOrganizer v2.8.0" && \
-	cd ~/ && \
-	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-binaries-matlabmcr2018b.tgz && \
-	tar -xvf cellorganizer-binaries-matlabmcr2018b.tgz && \
-	rm cellorganizer-binaries-matlabmcr2018b.tgz && \
-	mv cellorganizer-binaries /opt
+COPY cellorganizer-binaries/ /home/murphylab/cellorganizer-binaries
+RUN echo "Downloading CellOrganizer v2.8.0"
+RUN cd /home/murphylab
+RUN mv cellorganizer-binaries /opt
 
 RUN mkdir /home/murphylab/cellorganizer-python && mkdir /home/murphylab/cellorganizer
 COPY cellorganizer-python /home/murphylab/cellorganizer-python
@@ -85,6 +83,7 @@ RUN ln -s /opt/bftools/bfconvert /usr/local/bin/bfconvert && \
 	ln -s /opt/bftools/xmlindent /usr/local/bin/xmlindent && \
 	ln -s /opt/bftools/xmlvalid /usr/local/bin/xmlvalid
 
+
 # COPY CELLORGANIZER BINARIES FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /opt/cellorganizer-binaries /opt/cellorganizer-binaries
 RUN	chmod +x /opt/cellorganizer-binaries/img2slml && \
@@ -96,7 +95,7 @@ RUN	chmod +x /opt/cellorganizer-binaries/img2slml && \
 	ln -s /opt/cellorganizer-binaries/slml2img /usr/local/bin/slml2img && \
 	ln -s /opt/cellorganizer-binaries/slml2report /usr/local/bin/slml2report && \
 	ln -s /opt/cellorganizer-binaries/slml2info /usr/local/bin/slml2info && \
-	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml
+	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml && \
 
 # COPY HOME DIRECTORY FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /home/murphylab /home/murphylab
@@ -108,7 +107,13 @@ RUN rm -rf /home/murphylab/cellorganizer-python
 
 # MOVE LOGO FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png
+
+RUN apt-get update && apt-get install -y xserver-xorg
 ###############################################################################################
+
+RUN ls /opt/bftools
+RUN export DISPLAY=:1.0
+CMD ["java","-jar","/opt/bftools/bioformats_package.jar"]
 
 ##############################################################################################\
 # GET READY!
