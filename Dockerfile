@@ -95,7 +95,7 @@ RUN	chmod +x /opt/cellorganizer-binaries/img2slml && \
 	ln -s /opt/cellorganizer-binaries/slml2img /usr/local/bin/slml2img && \
 	ln -s /opt/cellorganizer-binaries/slml2report /usr/local/bin/slml2report && \
 	ln -s /opt/cellorganizer-binaries/slml2info /usr/local/bin/slml2info && \
-	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml && \
+	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml
 
 # COPY HOME DIRECTORY FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /home/murphylab /home/murphylab
