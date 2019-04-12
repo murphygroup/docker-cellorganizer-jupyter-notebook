@@ -4,7 +4,7 @@
 # _|_| \|||_| \|  ||_|_/_|_/--\||_ _|_|  |/--\\_||_
 ###############################################################################################
 
-FROM murphylab/matlabmcr2018b-jupyter as intermediate
+FROM murphylab/matlabmcr2018b-jupyter:18.04 as intermediate
 
 ###############################################################################################
 # INSTALL BFTOOLS
@@ -58,7 +58,7 @@ COPY files /home/murphylab/cellorganizer
 ###############################################################################################
 # COPY CELLORGANIZER LOGO TO JUPYTER NOTEBOOK
 RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
-	mv -v logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images
+	mv -v logo.png /opt/conda/lib/python3.7/site-packages/notebook/static/base/images
 ###############################################################################################
 
 ###############################################################################################
@@ -68,7 +68,7 @@ RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.p
 #
 ###############################################################################################
 
-FROM murphylab/matlabmcr2018b-jupyter
+FROM murphylab/matlabmcr2018b-jupyter:18.04
 
 ###############################################################################################
 MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
