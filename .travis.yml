@@ -10,6 +10,12 @@ branches:
   only:
     - master
 
+git:
+  submodules: false
+
+before_install:
+  - git submodule update --init --remote --recursive
+
 script:
   - docker build --no-cache -t murphylab/cellorganizer-jupyter:latest .
   - docker tag murphylab/cellorganizer-jupyter:latest murphylab/cellorganizer-jupyter:v2.8.0
