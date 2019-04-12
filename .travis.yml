@@ -14,7 +14,11 @@ git:
   submodules: false
 
 before_install:
-  - git submodule update --init --remote --recursive
+  - git submodule init
+  - git submodule update 
+  - cd cellorganizer-python
+  - git checkout master
+  - cd ..  
 
 script:
   - docker build --no-cache -t murphylab/cellorganizer-jupyter:latest .
