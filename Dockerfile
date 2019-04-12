@@ -110,7 +110,7 @@ RUN cd /home/murphylab/cellorganizer-python && python setup.py install
 RUN rm -rf /home/murphylab/cellorganizer-python
 
 # MOVE LOGO FROM INTERMEDIATE TO FINAL IMAGE
-COPY --from=intermediate /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png /opt/conda/lib/python3.6/site-packages/notebook/static/base/images/logo.png
+COPY --from=intermediate /opt/conda/lib/python3.7/site-packages/notebook/static/base/images/logo.png /opt/conda/lib/python3.7/site-packages/notebook/static/base/images/logo.png
 ###############################################################################################
 
 ##############################################################################################\
