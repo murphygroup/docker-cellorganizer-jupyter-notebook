@@ -119,7 +119,9 @@ COPY --from=intermediate /opt/conda/lib/python3.7/site-packages/notebook/static/
 # GET READY!
 USER root
 RUN chown -Rv 1001:users /home/murphylab/cellorganizer
+RUN mkdir -p /home/murphylab/local && chown -Rv 1001:users /home/murphylab/local
 RUN chown -Rv 1001:users /scratch
 USER murphylab
 WORKDIR /home/murphylab/cellorganizer
+VOLUME /home/murphylab/cellorganizer/local
 ##############################################################################################
