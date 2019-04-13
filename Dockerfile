@@ -45,7 +45,9 @@ RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellor
 	mkdir -p cellorganizer/models/3D/diffeomorphic && \
         mkdir -p cellorganizer/models/2D/HeLa_PCA && \
         mv -v cell-models/cellorganizer/models/2D/HeLa_PCA/* cellorganizer/models/2D/HeLa_PCA && \
- 	mv -v cell-models/cellorganizer/models/3D/diffeomorphic/* cellorganizer/models/3D/diffeomorphic && \
+        mv -v cell-models/cellorganizer/models/2D/*.mat cellorganizer/models/2D/  && \
+        mv -v cell-models/cellorganizer/models/3D/*.mat cellorganizer/models/3D/  && \
+        mv -v cell-models/cellorganizer/models/3D/diffeomorphic/* cellorganizer/models/3D/diffeomorphic && \
         rm cellorganizer/models/3D/diffeomorphic/cell_model_nuc_align.mat && \
 	rm -rf cellorganizer-models.tgz cell-models
 ###############################################################################################
