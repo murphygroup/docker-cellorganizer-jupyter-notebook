@@ -15,7 +15,7 @@ fi
 
 docker run --rm -p 8888:8888 \
 	-v $(pwd)/data:/home/murphylab/cellorganizer/local \
-	--memory="8g" \
+	--memory="4g" \
 	--cpus=2 \
 	-e JUPYTER_LAB_ENABLE=yes \
 	murphylab/cellorganizer-jupyter
