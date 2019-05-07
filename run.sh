@@ -18,4 +18,4 @@ docker run --rm -p 8888:8888 \
 	--memory="8g" \
 	--cpus=2 \
 	-e JUPYTER_LAB_ENABLE=yes \
-	asankar/cellorganizer-jupyter
+	murphylab/cellorganizer-jupyter
