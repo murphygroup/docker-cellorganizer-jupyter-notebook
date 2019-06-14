@@ -21,7 +21,7 @@ WORKDIR /home/murphylab
 USER root
 RUN echo "Downloading CellOrganizer v2.8.0" && \
 	cd ~/ && \
-	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-binaries-matlabmcr2018b.tgz && \
+	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.8.1/docker/cellorganizer-binaries-matlabmcr2018b.tgz && \
 	tar -xvf cellorganizer-binaries-matlabmcr2018b.tgz && \
 	rm cellorganizer-binaries-matlabmcr2018b.tgz && \
 	mv cellorganizer-binaries /opt
@@ -32,7 +32,7 @@ COPY cellorganizer-python /home/murphylab/cellorganizer-python
 
 ###############################################################################################
 # INSTALL CELLORGANIZER IMAGES FOR DEMO2D01
-RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images/demo2D01.tgz && \
+RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.1/docker/images/demo2D01.tgz && \
 	mkdir -p cellorganizer/images/HeLa/2D/LAMP2 && \
 	tar -xvf demo2D01.tgz -C cellorganizer/images/HeLa/2D/LAMP2/ && \
 	rm -fv demo2D01.tgz
@@ -40,7 +40,7 @@ RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/images
 
 ###############################################################################################
 # INSTALL CELLORGANIZER 3D Diffeomorphic Models
-RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/cellorganizer-models.tgz && \
+RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.1/docker/cellorganizer-models.tgz && \
 	mkdir cell-models && tar -xvf cellorganizer-models.tgz -C cell-models && \
 	mkdir -p cellorganizer/models/3D/diffeomorphic && \
         mkdir -p cellorganizer/models/2D/HeLa_PCA && \
