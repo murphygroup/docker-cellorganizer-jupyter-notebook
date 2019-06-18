@@ -1,7 +1,7 @@
 # docker-cellorganizer-jupyter-notebook
 
 [![Build Status](https://travis-ci.org/murphygroup/docker-cellorganizer-jupyter-notebook.svg?branch=master)](https://travis-ci.org/murphygroup/docker-cellorganizer-jupyter-notebook)
-[![Release Status](https://img.shields.io/badge/release-v2.8.0-red.svg)](http://www.cellorganizer.org/)
+[![Release Status](https://img.shields.io/badge/release-v2.8.1-red.svg)](http://www.cellorganizer.org/)
 [![GitHub issues](https://img.shields.io/github/issues/murphygroup/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/murphygroup/docker-cellorganizer-jupyter-notebook/issues)
 [![GitHub forks](https://img.shields.io/github/forks/murphygroup/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/murphygroup/docker-cellorganizer-jupyter-notebook/network)
 [![GitHub stars](https://img.shields.io/github/stars/murphygroup/docker-cellorganizer-jupyter-notebook.svg)](https://github.com/murphygroup/docker-cellorganizer-jupyter-notebook/stargazers)
@@ -30,6 +30,19 @@ Model learning captures variation among cells in a collection of images. Images 
 These models can be conditional upon each other. For example, for a given synthesized cell instance, organelle position is dependent upon the cell and nuclear shape of that instance.
 
 Cell types for which generative models for at least some organelles have been built include human HeLa cells, mouse NIH 3T3 cells, and Arabidopsis protoplasts. Planned projects include mouse T lymphocytes and rat PC12 cells.
+
+### CellOrganizer v2.8.1
+
+#### Fixes
+* Display shape space when dataset field is not present or empty.
+* Generation of watertight SBML Spatial output has been corrected for translation errors.
+
+#### Other
+* The following models have been rebuilt using this version of CellOrganizer. Updated models can be found in the model re$
+        * 2D HeLa diffeomorphic framework
+        * 2D HeLa PCA framework
+        * 2D HeLa classic framework
+* CellOrganizer for Galaxy now Galaxy server v19.05
 
 ### CellOrganizer v2.8.0
 
