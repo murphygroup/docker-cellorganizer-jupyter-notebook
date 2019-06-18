@@ -39,9 +39,11 @@ Cell types for which generative models for at least some organelles have been bu
 
 #### Other
 * The following models have been rebuilt using this version of CellOrganizer. Updated models can be found in the model re$
+
         * 2D HeLa diffeomorphic framework
         * 2D HeLa PCA framework
         * 2D HeLa classic framework
+
 * CellOrganizer for Galaxy now Galaxy server v19.05
 
 ### CellOrganizer v2.8.0
