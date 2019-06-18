@@ -38,13 +38,34 @@ Cell types for which generative models for at least some organelles have been bu
 * Generation of watertight SBML Spatial output has been corrected for translation errors.
 
 #### Other
-* The following models have been rebuilt using this version of CellOrganizer. Updated models can be found in the model repository
+* The following models have been rebuilt using this version of CellOrganizer. Updated models can be found in the model repository.
    
   - 2D HeLa diffeomorphic framework
   - 2D HeLa PCA framework
   - 2D HeLa classic framework
 
-* CellOrganizer for Galaxy now Galaxy server v19.05
+* CellOrganizer for Galaxy now supports Galaxy server v19.05.
+
+#### Demo List
+
+The following demo scripts are included and have been tested in the image. 
+
+| Demo Name| Training | Synthesis |
+|----------|----------|-----------|
+| demo2D00 |          |            X            |
+| demo2D01 |            X           |           |
+| demo2D02 |          |            X            |
+| demo2D04 |            X           |           |
+| demo2D05 |            X           |           |
+| demo2D06 |          |            X            |
+| demo2D07 |          |            X            |
+| demo2D08 |          |            |
+| demo2D09 |            X           |           |
+| demo3D00 |          |            X            |
+| demo3D11 |            X           |           |
+| demo3D12 |            X           |           |
+
+The demos in the table above are the same demos included in the Matlab distribution.
 
 ### CellOrganizer v2.8.0
 
