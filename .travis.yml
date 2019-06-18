@@ -22,5 +22,4 @@ before_install:
 
 script:
   - docker build --no-cache -t murphylab/cellorganizer-jupyter:latest .
-  - docker tag murphylab/cellorganizer-jupyter:latest murphylab/cellorganizer-jupyter:v2.8.0
   - docker images list
