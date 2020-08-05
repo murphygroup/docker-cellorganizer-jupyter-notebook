@@ -9,7 +9,7 @@ cd cellorganizer-python
 git checkout master
 cd ..
 
-if [ ! -f "cellorganizer-binaries.tgz" ]; then
+if [ ! -f 'cellorganizer-binaries.tgz' ]; then
     echo "downloading from web!!"
     wget -nc --quiet http://www.cellorganizer.org/Downloads/latest/docker/cellorganizer-binaries.tgz
 fi
