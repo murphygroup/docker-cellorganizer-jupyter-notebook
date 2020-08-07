@@ -1,5 +1,7 @@
 sudo: required
 
+enabled: false
+
 language: ruby
 
 services:
