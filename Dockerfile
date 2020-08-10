@@ -4,12 +4,12 @@
 # _|_| \|||_| \|  ||_|_/_|_/--\||_ _|_|  |/--\\_||_
 ###############################################################################################
 
-FROM murphylab/matlabmcr2018b-jupyter:18.04 as intermediate
+FROM murphylab/matlabmcr2019b-jupyter:latest as intermediate
 
 ###############################################################################################
 # INSTALL BFTOOLS
 USER root
-RUN wget --quiet -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/artifacts/bftools.zip && \
+RUN wget --quiet --no-check-certificate -nc https://downloads.openmicroscopy.org/bio-formats/6.5.0/artifacts/bftools.zip && \
 	unzip bftools.zip && \
 	rm -fv bftools.zip && \
 	mv -v bftools /opt/
@@ -17,17 +17,10 @@ RUN wget --quiet -nc https://downloads.openmicroscopy.org/latest/bio-formats5.8/
 
 ###############################################################################################
 # INSTALL CELLORGANIZER BINARIES
-WORKDIR /home/murphylab
 USER root
-RUN echo "Downloading CellOrganizer v2.8.2" && \
-	cd ~/ && \
-	wget -nc --quiet http://www.cellorganizer.org/Downloads/v2.8.2/docker/cellorganizer-binaries-matlabmcr2018b.tgz && \
-	tar -xvf cellorganizer-binaries-matlabmcr2018b.tgz && \
-	rm cellorganizer-binaries-matlabmcr2018b.tgz && \
-	mv cellorganizer-binaries /opt
-
 RUN mkdir /home/murphylab/cellorganizer-python && mkdir /home/murphylab/cellorganizer
-COPY cellorganizer-python /home/murphylab/cellorganizer-python
+WORKDIR /home/murphylab
+ADD cellorganizer-python /home/murphylab/cellorganizer-python
 ###############################################################################################
 
 ###############################################################################################
@@ -37,7 +30,7 @@ COPY files /home/murphylab/cellorganizer
 
 ###############################################################################################
 # COPY CELLORGANIZER LOGO TO JUPYTER NOTEBOOK
-RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.png && \
+RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/latest/docker/logo.png && \
 	mv -v logo.png /opt/conda/lib/python3.7/site-packages/notebook/static/base/images
 ###############################################################################################
 
@@ -48,14 +41,14 @@ RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/v2.8.0/docker/logo.p
 #
 ###############################################################################################
 
-FROM murphylab/matlabmcr2018b-jupyter:18.04
+FROM murphylab/matlabmcr2019b-jupyter:latest
 
 ###############################################################################################
 MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
 LABEL Description="CellOrganizer + Jupyter Notebook"
 LABEL Vendor="CellOrganizer"
 LABEL Web="http://www.cellorganizer.org"
-LABEL Version="v2.8.0"
+LABEL Version="v2.9.0"
 ###############################################################################################
 
 ###############################################################################################
@@ -69,7 +62,7 @@ RUN ln -s /opt/bftools/bfconvert /usr/local/bin/bfconvert && \
 	ln -s /opt/bftools/xmlvalid /usr/local/bin/xmlvalid
 
 # COPY CELLORGANIZER BINARIES FROM INTERMEDIATE TO FINAL IMAGE
-COPY --from=intermediate /opt/cellorganizer-binaries /opt/cellorganizer-binaries
+ADD cellorganizer-binaries /opt/cellorganizer-binaries/.
 RUN	chmod +x /opt/cellorganizer-binaries/img2slml && \
 	chmod +x /opt/cellorganizer-binaries/slml2img && \
 	chmod +x /opt/cellorganizer-binaries/slml2report && \
