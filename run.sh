@@ -5,8 +5,9 @@ if [ ! -d ~/Desktop/mmbios2020 ]; then
 
         ####################################################################################################
 	# icaoberg - this creates temporary folder on Desktop and then downloads images from Murphy Lab site
-	mkdir -p ~/Desktop/mmbios2020/images
-	cd ~/Desktop/mmbios2020/images
+	# soham - now the creation of image folder happens via python layer
+	# mkdir -p ~/Desktop/mmbios2020/images
+	# cd ~/Desktop/mmbios2020/images
         ####################################################################################################
 
 	cd $DIRECTORY
