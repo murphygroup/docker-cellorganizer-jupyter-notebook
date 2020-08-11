@@ -2,14 +2,11 @@
 
 if [ ! -d ~/Desktop/mmbios2020 ]; then
         DIRECTORY=$(pwd)
-
-        ####################################################################################################
-	# icaoberg - this creates temporary folder on Desktop and then downloads images from Murphy Lab site
-	# soham - now the creation of image folder happens via python layer
-	# mkdir -p ~/Desktop/mmbios2020/images
-	# cd ~/Desktop/mmbios2020/images
-        ####################################################################################################
-
+      ####################################################################################################
+	    # icaoberg - this creates temporary folder on Desktop
+	    mkdir -p ~/Desktop/mmbios2020
+	    cd ~/Desktop/mmbios2020
+      ####################################################################################################
 	cd $DIRECTORY
 fi
 
