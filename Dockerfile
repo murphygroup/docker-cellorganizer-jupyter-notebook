@@ -26,7 +26,7 @@ ADD cellorganizer-python /home/murphylab/cellorganizer-python
 ###############################################################################################
 # INSTALL CELLORGANIZER NOTEBOOKS
 # no need for old notebook files
-# COPY old_back_notebooks/files /home/murphylab/cellorganizer
+COPY files /home/murphylab/cellorganizer
 ###############################################################################################
 
 ###############################################################################################
