@@ -11,7 +11,9 @@ cd ..
 
 if [ ! -f cellorganizer-binaries.tgz ]; then
     echo "downloading from web!!"
-    wget -nc --quiet http://www.cellorganizer.org/Downloads/latest/docker/cellorganizer-binaries.tgz
+#   wget -nc --quiet http://www.cellorganizer.org/Downloads/latest/docker/cellorganizer-binaries.tgz
+    wget --no-check-certificate 'https://docs.google.com/uc?
+    export=download&id=1EBBnSG-_MjOB1Ju1tQg3kvzYlAUD_v0j' -O 'cellorganizer-binaries.tgz'
 fi
 
 tar -xvf cellorganizer-binaries.tgz && \
