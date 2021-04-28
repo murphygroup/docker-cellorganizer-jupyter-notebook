@@ -1,0 +1,3 @@
+[submodule "cellorganizer-python"]
+	path = cellorganizer-python
+	url = https://github.com/murphygroup/cellorganizer-python.git
