@@ -13,7 +13,6 @@ fi
 ############################################################################################################
 docker run --rm -p 8888:8888 \
 	-v ~/Desktop/mmbios2021:/home/murphylab/cellorganizer/local \
-	-- user "$(id-u):$(id -g)" \
 	--memory="4g" \
 	--cpus=2 \
 	-e JUPYTER_LAB_ENABLE=yes \
