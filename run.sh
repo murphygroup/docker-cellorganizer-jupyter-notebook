@@ -1,18 +1,19 @@
 #!/bin/bash
 
-if [ ! -d ~/Desktop/mmbios2020 ]; then
+if [ ! -d ~/Desktop/mmbios2021 ]; then
         DIRECTORY=$(pwd)
       ####################################################################################################
 	    # icaoberg - this creates temporary folder on Desktop
-	    mkdir -p ~/Desktop/mmbios2020
-	    cd ~/Desktop/mmbios2020
+	    mkdir -p ~/Desktop/mmbios2021
+	    cd ~/Desktop/mmbios2021
       ####################################################################################################
 	cd $DIRECTORY
 fi
 
 ############################################################################################################
 docker run --rm -p 8888:8888 \
-	-v ~/Desktop/mmbios2020:/home/murphylab/cellorganizer/local \
+	-v ~/Desktop/mmbios2021:/home/murphylab/cellorganizer/local \
+	-- user "$(id-u):$(id -g)" \
 	--memory="4g" \
 	--cpus=2 \
 	-e JUPYTER_LAB_ENABLE=yes \
