@@ -43,7 +43,8 @@ RUN wget --quiet -nc http://www.cellorganizer.org/Downloads/latest/docker/logo.p
 ###############################################################################################
 
 FROM murphylab/matlabmcr2019b-jupyter:latest
-
+#FROM python:3.9-slim
+#FROM ubuntu
 ###############################################################################################
 MAINTAINER Ivan E. Cao-Berg <icaoberg@andrew.cmu.edu>
 LABEL Description="CellOrganizer + Jupyter Notebook"
@@ -51,7 +52,13 @@ LABEL Vendor="CellOrganizer"
 LABEL Web="http://www.cellorganizer.org"
 LABEL Version="v2.9.0"
 ###############################################################################################
+#create new user
+#ARG USER_ID
+#ARG GROUP_ID
 
+#RUN addgroup --gid $GROUP_ID user
+#RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
+#USER user
 ###############################################################################################
 # COPY BFTOOLS FROM INTERMEDIATE TO FINAL IMAGE
 USER root
@@ -79,6 +86,7 @@ RUN	chmod +x /opt/cellorganizer-binaries/img2slml && \
 COPY --from=intermediate /home/murphylab /home/murphylab
 
 # INSTALL CELLORGANIZER FOR PYTHON
+# RUN ln -s /usr/local/bin/python3 /usr/local/bin/python
 RUN mkdir /scratch
 RUN cd /home/murphylab/cellorganizer-python && python setup.py install
 RUN rm -rf /home/murphylab/cellorganizer-python
