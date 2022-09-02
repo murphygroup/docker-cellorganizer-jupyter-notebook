@@ -20,5 +20,5 @@ tar -xvf cellorganizer-binaries.tgz && \
 rm cellorganizer-binaries.tgz
 
 #docker build --no-cache -t icaoberg/cellorganizer-jupyter:latest .
-docker build -t murphylab/cellorganizer-jupyter:latest .
-docker tag murphylab/cellorganizer-jupyter:latest murphylab/cellorganizer-jupyter:mmbios2021
+docker build -t murphylab/cellorganizer-jupyter:dev .
+docker tag murphylab/cellorganizer-jupyter:dev murphylab/cellorganizer-jupyter:dev
