@@ -76,12 +76,25 @@ RUN	chmod +x /opt/cellorganizer-binaries/img2slml && \
 	chmod +x /opt/cellorganizer-binaries/slml2report && \
 	chmod +x /opt/cellorganizer-binaries/slml2info && \
 	chmod +x /opt/cellorganizer-binaries/slml2slml && \
+	chmod +x /opt/cellorganizer-binaries/image2SPHARMparameterization && \
+	chmod +x /opt/cellorganizer-binaries/img2shapespace && \
+	chmod +x /opt/cellorganizer-binaries/SPHARMparameterization2image && \
+	chmod +x /opt/cellorganizer-binaries/SPHARMparameterization2mesh && \
 	ln -s /opt/cellorganizer-binaries/img2slml /usr/local/bin/img2slml && \
 	ln -s /opt/cellorganizer-binaries/slml2img /usr/local/bin/slml2img && \
 	ln -s /opt/cellorganizer-binaries/slml2report /usr/local/bin/slml2report && \
 	ln -s /opt/cellorganizer-binaries/slml2info /usr/local/bin/slml2info && \
-	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml
+	ln -s /opt/cellorganizer-binaries/slml2slml /usr/local/bin/slml2slml && \
+	ln -s /opt/cellorganizer-binaries/image2SPHARMparameterization /usr/local/bin/image2SPHARMparameterization && \
+	ln -s /opt/cellorganizer-binaries/img2shapespace /usr/local/bin/img2shapespace && \
+	ln -s /opt/cellorganizer-binaries/SPHARMparameterization2image /usr/local/bin/SPHARMparameterization2image && \
+	ln -s /opt/cellorganizer-binaries/SPHARMparameterization2mesh /usr/local/bin/SPHARMparameterization2mesh
 
+# PIP INSTALL
+ADD cellorganizer-python/requirements.txt /home/murphylab/cellorganizer-python/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+  && pip install --no-cache-dir -r /home/murphylab/cellorganizer-python/requirements.txt
+  
 # COPY HOME DIRECTORY FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /home/murphylab /home/murphylab
 
@@ -90,6 +103,9 @@ COPY --from=intermediate /home/murphylab /home/murphylab
 RUN mkdir /scratch
 RUN cd /home/murphylab/cellorganizer-python && python setup.py install
 RUN rm -rf /home/murphylab/cellorganizer-python
+
+# add version txt
+ADD cellorganizer-python/cellorganizer/version.txt /opt/conda/lib/python3.7/site-packages/cellorganizer/version.txt
 
 # MOVE LOGO FROM INTERMEDIATE TO FINAL IMAGE
 COPY --from=intermediate /opt/conda/lib/python3.7/site-packages/notebook/static/base/images/logo.png /opt/conda/lib/python3.7/site-packages/notebook/static/base/images/logo.png
